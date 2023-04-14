@@ -43,27 +43,8 @@ public class EmployeeController {
     )  {
         return employeeService.findEmployee(firstName, lastName, department, salary);
     }
-    @GetMapping(path = "/departments/max-salary")
-    public Employee getEmployeeWithMaxSalaryForDepartment(@RequestParam(required = false) String department) {
-        return employeeService.getEmployeeWithMaxSalaryForDepartment(department);
-    }
-
-    @GetMapping(path = "/departments/min-salary")
-    public Employee getEmployeeWithMinSalaryForDepartment(@RequestParam(required = false) String department) {
-        return employeeService.getEmployeeWithMinSalaryForDepartment(department);
-    }
-
     @GetMapping(path = "/employee/print")
     public List<Employee> print() {
         return employeeService.printEmployees();
-    }
-
-    @GetMapping(path = "/departments/all")
-    public List<Employee> printEmployeesListForDepartment(@RequestParam(required = false) String department) {
-        return employeeService.printEmployeesListForDepartment(department);
-    }
-    @GetMapping(path = "/departments/all2")
-    public List<Employee> printEmployeesListByDepartment() {
-        return employeeService.printEmployeesListByDepartment();
     }
 }

@@ -8,13 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    //static Employee[] employees = new Employee[10];
     private final int CAPACITY = 5;
     public List<Employee> employees = new ArrayList<>(CAPACITY);
 
@@ -50,28 +47,9 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new EmployeeNotFoundException();
         }
     }
-
-    @Override
-    public Employee getEmployeeWithMaxSalaryForDepartment(String department) {
-        return employees.stream().filter(e -> e.getDepartment().equals(department)).max(Comparator.comparingDouble(Employee::getSalary)).get();
-    }
-
-    @Override
-    public Employee getEmployeeWithMinSalaryForDepartment(String department) {
-        return employees.stream().filter(e -> e.getDepartment().equals(department)).min(Comparator.comparingDouble(Employee::getSalary)).get();
-    }
     @Override
     public List<Employee> printEmployees() {
         return Collections.unmodifiableList(employees);
-    }
-    @Override
-    public List<Employee> printEmployeesListForDepartment(String department) {
-        return printEmployees().stream().filter(e -> e.getDepartment().equals(department)).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Employee> printEmployeesListByDepartment() {
-        return printEmployees().stream().sorted(Comparator.comparing(Employee::getDepartment)).collect(Collectors.toList());
     }
 
 }

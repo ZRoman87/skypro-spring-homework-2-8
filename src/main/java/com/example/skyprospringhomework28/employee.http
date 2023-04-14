@@ -16,6 +16,6 @@ GET http://localhost:8080/employee/print
 ###
 GET http://localhost:8080/departments/all?department=1
 ###
-GET http://localhost:8080/departments/all2
+GET http://localhost:8080/departments/all-by-department
 
 
