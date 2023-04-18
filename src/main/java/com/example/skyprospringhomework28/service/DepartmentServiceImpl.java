@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -19,19 +20,33 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Employee getEmployeeWithMaxSalaryForDepartment(String department) {
-        return employees.stream().filter(e -> e.getDepartment().equals(department)).max(Comparator.comparingDouble(Employee::getSalary)).get();
+        return employees.stream()
+                .filter(e -> e.getDepartment().equals(department))
+                .max(Comparator.comparingDouble(Employee::getSalary)).orElse(null);
     }
     @Override
     public Employee getEmployeeWithMinSalaryForDepartment(String department) {
-        return employees.stream().filter(e -> e.getDepartment().equals(department)).min(Comparator.comparingDouble(Employee::getSalary)).get();
+        return employees.stream()
+                .filter(e -> e.getDepartment().equals(department))
+                .min(Comparator.comparingDouble(Employee::getSalary)).orElse(null);
     }
     @Override
     public List<Employee> printEmployeesListForDepartment(String department) {
-        return employees.stream().filter(e -> e.getDepartment().equals(department)).collect(Collectors.toList());
+        return employees.stream()
+                .filter(e -> e.getDepartment().equals(department))
+                .collect(Collectors.toList());
     }
-    @Override
+ /*   @Override
     public List<Employee> printEmployeesListByDepartment() {
-        return employees.stream().sorted(Comparator.comparing(Employee::getDepartment)).collect(Collectors.toList());
+        return employees.stream()
+               .sorted(Comparator.comparing(Employee::getDepartment))
+               .collect(Collectors.toList());
+    }*/
+
+    @Override
+    public Map<String, List<Employee>> printEmployeesListByDepartment() {
+        return employees.stream()
+               .collect(Collectors.groupingBy(Employee::getDepartment));
     }
 
 }

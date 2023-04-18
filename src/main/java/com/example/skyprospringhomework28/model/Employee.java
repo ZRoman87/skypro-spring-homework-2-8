@@ -37,5 +37,4 @@ public class Employee {
         Employee e2 = (Employee) other;
         return firstName.equals(e2.firstName) && lastName.equals(e2.lastName);
     }
-
 }

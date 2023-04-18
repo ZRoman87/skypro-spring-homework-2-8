@@ -3,12 +3,14 @@ package com.example.skyprospringhomework28.controller;
 import com.example.skyprospringhomework28.service.EmployeeServiceImpl;
 import com.example.skyprospringhomework28.model.Employee;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/employee")
 public class EmployeeController {
 
     private final EmployeeServiceImpl employeeService;
@@ -17,7 +19,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping(path = "/employee/add")
+    @GetMapping(path = "/add")
     public Employee add(@RequestParam(required = false) String firstName,
                         @RequestParam(required = false) String lastName,
                         @RequestParam(required = false) String department,
@@ -26,7 +28,7 @@ public class EmployeeController {
         return employeeService.addEmployee(firstName, lastName, department, salary);
     }
 
-    @GetMapping(path = "/employee/remove")
+    @GetMapping(path = "/remove")
     public Employee remove(@RequestParam(required = false) String firstName,
                            @RequestParam(required = false) String lastName,
                            @RequestParam(required = false) String department,
@@ -35,7 +37,7 @@ public class EmployeeController {
         return employeeService.removeEmployee(firstName, lastName, department, salary);
     }
 
-    @GetMapping(path = "/employee/find")
+    @GetMapping(path = "/find")
     public Employee find(@RequestParam(required = false) String firstName,
                          @RequestParam(required = false) String lastName,
                          @RequestParam(required = false) String department,
@@ -43,7 +45,7 @@ public class EmployeeController {
     )  {
         return employeeService.findEmployee(firstName, lastName, department, salary);
     }
-    @GetMapping(path = "/employee/print")
+    @GetMapping(path = "/print")
     public List<Employee> print() {
         return employeeService.printEmployees();
     }
